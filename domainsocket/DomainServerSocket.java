@@ -10,9 +10,9 @@ public class DomainServerSocket {
     public static void main(String[] args) throws IOException {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open(StandardProtocolFamily.UNIX);
 
-        UnixDomainSocketAddress of = UnixDomainSocketAddress.of("/");
+        UnixDomainSocketAddress of = UnixDomainSocketAddress.of("./test.sock");
 
-        serverSocketChannel.socket().bind(of);
+        serverSocketChannel.bind(of);
 
         while (true) {
 

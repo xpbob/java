@@ -9,10 +9,10 @@ public class DomainClient {
      public static void main(String[] args) throws IOException {
 
         SocketChannel socketChannel = SocketChannel.open(StandardProtocolFamily.UNIX);
-        UnixDomainSocketAddress of = UnixDomainSocketAddress.of("/");
+        UnixDomainSocketAddress of = UnixDomainSocketAddress.of("./test.sock");
         boolean connect = socketChannel.connect(of);
 
-        String newData = "New String to write to file..." + System.currentTimeMillis();
+        String newData = "this is domain socket..." + System.currentTimeMillis();
 
         ByteBuffer buf = ByteBuffer.allocate(48);
         buf.clear();
@@ -23,6 +23,7 @@ public class DomainClient {
         while (buf.hasRemaining()) {
             socketChannel.write(buf);
         }
+        socketChannel.close();
 
     }
 }
